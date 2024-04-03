@@ -11,11 +11,7 @@
           ></v-img>
         </v-col>
         <v-col sm="12" lg="6" v-if="!loading">
-          <Bar
-            id="my-chart-id"
-            :options="chartOptions"
-            :data="chartData"
-          />
+          <Bar id="my-chart-id" :options="chartOptions" :data="chartData" />
           <v-table height="200px" fixed-header>
             <thead>
               <tr>
@@ -46,6 +42,9 @@
       <v-row align="center" justify="center" no-gutters>
         <v-btn color="primary" @click="randomcoin" v-if="!loading"
           >Roll {{ tries }}x</v-btn
+        >
+        <v-btn color="red" class="ml-3" @click="clearData" v-if="!loading"
+          >Clear Logs</v-btn
         >
       </v-row>
     </v-container>
@@ -127,6 +126,24 @@ export default {
     };
   },
   methods: {
+    clearData() {
+      this.chartData = {
+        labels: ["Head", "Tail"],
+        datasets: [
+          {
+            label: "Kejadian",
+            backgroundColor: "#1867c0",
+            data: [0, 0],
+          },
+        ],
+      };
+      this.logKejadian = [];
+      this.loading = true;
+      var that = this;
+      setTimeout(function () {
+        that.loading = false;
+      }, 100);
+    },
     async randomcoin() {
       this.loading = true;
       var sides = ["head", "tail"];

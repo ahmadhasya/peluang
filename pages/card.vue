@@ -43,6 +43,9 @@
         <v-btn color="primary" @click="randomCard" v-if="!loading"
           >Roll {{ tries }}x</v-btn
         >
+        <v-btn color="red" class="ml-3" @click="clearData" v-if="!loading"
+          >Clear Logs</v-btn
+        >
       </v-row>
     </v-container>
   </v-app>
@@ -138,6 +141,39 @@ export default {
     };
   },
   methods: {
+    clearData() {
+      this.chartData = {
+        labels: ["Ace", 2, 3, 4, 5, 6, 7, 8, 9, 10, "Jack", "Queen", "King"],
+        datasets: [
+          {
+            label: "Heart",
+            backgroundColor: "red",
+            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          },
+          {
+            label: "Club",
+            backgroundColor: "black",
+            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          },
+          {
+            label: "Diamond",
+            backgroundColor: "pink",
+            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          },
+          {
+            label: "Spade",
+            backgroundColor: "gray",
+            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          },
+        ],
+      };
+      this.logKejadian = [];
+      this.loading = true;
+      var that = this;
+      setTimeout(function () {
+        that.loading = false;
+      }, 100);
+    },
     async randomCard() {
       this.loading = true;
       var numbers = [

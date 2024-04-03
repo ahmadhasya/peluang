@@ -33,6 +33,9 @@
         <v-btn color="primary" @click="rollDice" v-if="!loading"
           >Roll {{ tries }}x</v-btn
         >
+        <v-btn color="red" class="ml-3" @click="clearData" v-if="!loading"
+          >Clear Logs</v-btn
+        >
       </v-row>
     </v-container>
   </v-app>
@@ -126,6 +129,24 @@ export default {
     }
   },
   methods: {
+    clearData() {
+      this.chartData = {
+        labels: ["1", "2", "3", "4", "5", "6"],
+        datasets: [
+          {
+            label: "Kejadian",
+            backgroundColor: "#1867c0",
+            data: [0, 0, 0, 0, 0, 0],
+          },
+        ],
+      };
+      this.logKejadian = [];
+      this.loading = true;
+      var that = this;
+      setTimeout(function () {
+        that.loading = false;
+      }, 100);
+    },
     rollDice() {
       this.loading = true;
       diceBox.roll("1d6");
