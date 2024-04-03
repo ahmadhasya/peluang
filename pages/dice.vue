@@ -3,16 +3,36 @@
     <v-container class="mb-6">
       <v-row align="center" no-gutters>
         <v-col id="dice-box" sm="12" lg="6"> </v-col>
-        <v-col sm="12" lg="6">
+        <v-col sm="12" lg="6" v-if="!loading">
           <Bar
             id="my-chart-id"
             v-if="!loading"
             :options="chartOptions"
             :data="chartData"
-        /></v-col>
+          />
+          <v-table height="200px" fixed-header>
+            <thead>
+              <tr>
+                <th>Number</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                v-for="(item, index) in logKejadian.slice().reverse()"
+                :key="index"
+              >
+                <td>{{ logKejadian.length - index }}</td>
+                <td>{{ item }}</td>
+              </tr>
+            </tbody>
+          </v-table>
+        </v-col>
       </v-row>
       <v-row align="center" justify="center" no-gutters>
-        <v-btn color="primary" @click="rollDice" v-if="!loading">Roll {{ tries }}x</v-btn>
+        <v-btn color="primary" @click="rollDice" v-if="!loading"
+          >Roll {{ tries }}x</v-btn
+        >
       </v-row>
     </v-container>
   </v-app>
@@ -44,20 +64,26 @@ var diceBox;
 
 export default {
   components: { Bar },
-  computed:{
-    tries(){
+  computed: {
+    tries() {
       var total = 0;
-      this.chartData.datasets.forEach(element=>{
+      this.chartData.datasets.forEach((element) => {
         total += element.data.reduce((partialSum, a) => partialSum + a, 0);
       });
       return total;
-    }
+    },
   },
   watch: {
     chartData: {
       deep: true,
       handler() {
         localStorage.setItem("diceChartData", JSON.stringify(this.chartData));
+      },
+    },
+    logKejadian: {
+      deep: true,
+      handler() {
+        localStorage.setItem("logDice", JSON.stringify(this.logKejadian));
       },
     },
   },
@@ -77,6 +103,7 @@ export default {
       chartOptions: {
         responsive: true,
       },
+      logKejadian: [],
     };
   },
   mounted() {
@@ -89,9 +116,13 @@ export default {
     diceBox.onDieComplete = (dieResult) => {
       that.loading = false;
       that.chartData.datasets[0].data[dieResult.value - 1] += 1;
+      that.logKejadian.push(dieResult.value);
     };
     if (localStorage.getItem("diceChartData")) {
       this.chartData = JSON.parse(localStorage.getItem("diceChartData"));
+    }
+    if (localStorage.getItem("logDice")) {
+      this.logKejadian = JSON.parse(localStorage.getItem("logDice"));
     }
   },
   methods: {
@@ -106,6 +137,6 @@ export default {
 <style>
 #dice-box canvas {
   width: 100%;
-  height: 300px;
+  height: 500px;
 }
 </style>

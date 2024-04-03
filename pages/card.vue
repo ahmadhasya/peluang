@@ -2,25 +2,47 @@
   <v-app>
     <v-container>
       <v-row align="center" no-gutters>
-        <v-col sm="12" lg="6">
+        <v-col sm="12" lg="6" align-self="start">
           <v-img
-            :width="200"
+            width="200"
             aspect-ratio="16/9"
             cover
             :src="card_image"
           ></v-img>
         </v-col>
-        <v-col sm="12" lg="6">
-          <Bar
-            id="my-chart-id"
-            v-if="!loading"
-            :options="chartOptions"
-            :data="chartData"
-          />
+        <v-col sm="12" lg="6" v-if="!loading">
+          <Bar id="my-chart-id" :options="chartOptions" :data="chartData" />
+          <v-table height="200px" fixed-header>
+            <thead>
+              <tr>
+                <th>Number</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                v-for="(item, index) in logKejadian.slice().reverse()"
+                :key="index"
+              >
+                <td>{{ logKejadian.length - index }}</td>
+                <td>
+                  <v-img
+                    :width="50"
+                    aspect-ratio="16/9"
+                    cover
+                    class="my-1"
+                    :src="item"
+                  ></v-img>
+                </td>
+              </tr>
+            </tbody>
+          </v-table>
         </v-col>
       </v-row>
       <v-row align="center" justify="center" no-gutters>
-        <v-btn color="primary" @click="randomCard" v-if="!loading">Roll {{ tries }}x</v-btn>
+        <v-btn color="primary" @click="randomCard" v-if="!loading"
+          >Roll {{ tries }}x</v-btn
+        >
       </v-row>
     </v-container>
   </v-app>
@@ -49,14 +71,14 @@ ChartJS.register(
 );
 export default {
   components: { Bar },
-  computed:{
-    tries(){
+  computed: {
+    tries() {
       var total = 0;
-      this.chartData.datasets.forEach(element=>{
+      this.chartData.datasets.forEach((element) => {
         total += element.data.reduce((partialSum, a) => partialSum + a, 0);
       });
       return total;
-    }
+    },
   },
   watch: {
     chartData: {
@@ -65,10 +87,19 @@ export default {
         localStorage.setItem("cardChartData", JSON.stringify(this.chartData));
       },
     },
+    logKejadian: {
+      deep: true,
+      handler() {
+        localStorage.setItem("logCard", JSON.stringify(this.logKejadian));
+      },
+    },
   },
-  mounted(){
+  mounted() {
     if (localStorage.getItem("cardChartData")) {
       this.chartData = JSON.parse(localStorage.getItem("cardChartData"));
+    }
+    if (localStorage.getItem("logCard")) {
+      this.logKejadian = JSON.parse(localStorage.getItem("logCard"));
     }
   },
   data() {
@@ -103,6 +134,7 @@ export default {
       chartOptions: {
         responsive: true,
       },
+      logKejadian: [],
     };
   },
   methods: {
@@ -137,6 +169,7 @@ export default {
       }
 
       this.chartData.datasets[random_types].data[random_numbers]++;
+      this.logKejadian.push(this.card_image);
       this.loading = false;
     },
   },
