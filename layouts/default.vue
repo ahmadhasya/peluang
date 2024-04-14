@@ -3,22 +3,27 @@
     <Title>Vue JS Peluang | {{ menu }}</Title>
     <slot />
     <v-bottom-navigation v-model="menu" color="primary">
-      <v-btn value="Dice" to="/dice">
+      <v-btn value="Dadu" to="/dice">
         <v-icon>mdi-dice-3</v-icon>
 
-        <span>Dice</span>
+        <span>Dadu</span>
       </v-btn>
 
-      <v-btn value="Card" to="/card">
+      <v-btn value="Kartu" to="/card">
         <v-icon>mdi-cards-playing-heart-multiple</v-icon>
 
-        <span>Card</span>
+        <span>Kartu</span>
       </v-btn>
 
-      <v-btn value="Coin" to="/coin">
+      <v-btn value="Koin" to="/coin">
         <v-icon>mdi-hand-coin</v-icon>
 
-        <span>Coin</span>
+        <span>Koin</span>
+      </v-btn>
+      <v-btn value="Bantuan" to="/help">
+        <v-icon>mdi-help</v-icon>
+
+        <span>Bantuan</span>
       </v-btn>
     </v-bottom-navigation>
   </v-app>

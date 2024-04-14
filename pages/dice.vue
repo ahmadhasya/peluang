@@ -14,8 +14,8 @@
           <v-table height="200px" fixed-header>
             <thead>
               <tr>
-                <th>Number</th>
-                <th>Value</th>
+                <th>Urutan</th>
+                <th>Nilai</th>
               </tr>
             </thead>
             <tbody>
@@ -32,10 +32,10 @@
       </v-row>
       <v-row align="center" justify="center" class="mb-5" no-gutters>
         <v-btn color="primary" @click="rollDice" :disabled="loading"
-          >Roll {{ tries }}x</v-btn
+          >Acak {{ tries }}x</v-btn
         >
         <v-btn color="red" class="ml-3" @click="clearData" :disabled="loading"
-          >Clear Logs</v-btn
+          >Bersihkan</v-btn
         >
       </v-row>
     </v-container>
