@@ -2,15 +2,12 @@
   <v-app>
     <v-container>
       <v-row align="center" no-gutters>
-        <v-col sm="12" lg="6" align-self="start">
-          <v-img
-            width="200"
-            aspect-ratio="16/9"
-            cover
-            :src="card_image"
-          ></v-img>
+        <v-col cols="12" sm="12" lg="6">
+          <v-row style="width: 100%" justify="center">
+            <img style="max-width: 200px" :src="card_image" />
+          </v-row>
         </v-col>
-        <v-col sm="12" lg="6" v-if="!loading">
+        <v-col cols="12" sm="12" lg="6" class="pt-5">
           <Bar id="my-chart-id" :options="chartOptions" :data="chartData" />
           <v-table height="200px" fixed-header>
             <thead>
@@ -39,11 +36,11 @@
           </v-table>
         </v-col>
       </v-row>
-      <v-row align="center" justify="center" no-gutters>
-        <v-btn color="primary" @click="randomCard" v-if="!loading"
+      <v-row align="center" justify="center" class="mb-10" no-gutters>
+        <v-btn color="primary" @click="randomCard" :disabled="loading"
           >Roll {{ tries }}x</v-btn
         >
-        <v-btn color="red" class="ml-3" @click="clearData" v-if="!loading"
+        <v-btn color="red" class="ml-3" @click="clearData" :disabled="loading"
           >Clear Logs</v-btn
         >
       </v-row>
@@ -203,8 +200,9 @@ export default {
         await delay(100);
         this.card_image = `/assets/aces/${numbers[random_numbers]}_of_${types[random_types]}.png`;
       }
-
-      this.chartData.datasets[random_types].data[random_numbers]++;
+      var tmp = JSON.parse(JSON.stringify(this.chartData));
+      tmp.datasets[random_types].data[random_numbers]++;
+      this.chartData = tmp;
       this.logKejadian.push(this.card_image);
       this.loading = false;
     },

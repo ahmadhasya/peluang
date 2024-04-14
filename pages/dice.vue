@@ -2,11 +2,12 @@
   <v-app>
     <v-container class="mb-6">
       <v-row align="center" no-gutters>
-        <v-col id="dice-box" sm="12" lg="6"> </v-col>
-        <v-col sm="12" lg="6" v-if="!loading">
+        <v-col cols="12" sm="12" lg="6">
+          <div id="dice-box"></div>
+        </v-col>
+        <v-col cols="12" sm="12" lg="6">
           <Bar
             id="my-chart-id"
-            v-if="!loading"
             :options="chartOptions"
             :data="chartData"
           />
@@ -29,11 +30,11 @@
           </v-table>
         </v-col>
       </v-row>
-      <v-row align="center" justify="center" no-gutters>
-        <v-btn color="primary" @click="rollDice" v-if="!loading"
+      <v-row align="center" justify="center" class="mb-5" no-gutters>
+        <v-btn color="primary" @click="rollDice" :disabled="loading"
           >Roll {{ tries }}x</v-btn
         >
-        <v-btn color="red" class="ml-3" @click="clearData" v-if="!loading"
+        <v-btn color="red" class="ml-3" @click="clearData" :disabled="loading"
           >Clear Logs</v-btn
         >
       </v-row>
@@ -118,7 +119,9 @@ export default {
     diceBox.init();
     diceBox.onDieComplete = (dieResult) => {
       that.loading = false;
-      that.chartData.datasets[0].data[dieResult.value - 1] += 1;
+      var tmp = JSON.parse(JSON.stringify(this.chartData));
+      tmp.datasets[0].data[dieResult.value - 1] += 1;
+      that.chartData = tmp;
       that.logKejadian.push(dieResult.value);
     };
     if (localStorage.getItem("diceChartData")) {
@@ -158,6 +161,6 @@ export default {
 <style>
 #dice-box canvas {
   width: 100%;
-  height: 500px;
+  height: 40vh;
 }
 </style>

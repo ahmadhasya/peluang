@@ -2,15 +2,12 @@
   <v-app>
     <v-container>
       <v-row align="center" no-gutters>
-        <v-col sm="12" lg="6" align-self="start">
-          <v-img
-            :width="200"
-            aspect-ratio="16/9"
-            cover
-            :src="coin_image"
-          ></v-img>
+        <v-col cols="12" sm="12" lg="6">
+          <v-row style="width: 100%" justify="center">
+            <img style="max-width: 200px" :src="coin_image" />
+          </v-row>
         </v-col>
-        <v-col sm="12" lg="6" v-if="!loading">
+        <v-col cols="12" sm="12" lg="6" class="pt-5">
           <Bar id="my-chart-id" :options="chartOptions" :data="chartData" />
           <v-table height="200px" fixed-header>
             <thead>
@@ -39,11 +36,11 @@
           </v-table>
         </v-col>
       </v-row>
-      <v-row align="center" justify="center" no-gutters>
-        <v-btn color="primary" @click="randomcoin" v-if="!loading"
+      <v-row align="center" justify="center" class="mb-10" no-gutters>
+        <v-btn color="primary" @click="randomcoin" :disabled="loading"
           >Roll {{ tries }}x</v-btn
         >
-        <v-btn color="red" class="ml-3" @click="clearData" v-if="!loading"
+        <v-btn color="red" class="ml-3" @click="clearData" :disabled="loading"
           >Clear Logs</v-btn
         >
       </v-row>
@@ -155,8 +152,9 @@ export default {
         side = i % 2;
         this.coin_image = `/assets/coin/coin_${sides[side]}.png`;
       }
-
-      this.chartData.datasets[0].data[side]++;
+      var tmp = JSON.parse(JSON.stringify(this.chartData));
+      tmp.datasets[0].data[side]++;
+      this.chartData = tmp;
       this.logKejadian.push(this.coin_image);
       this.loading = false;
     },
