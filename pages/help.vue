@@ -2,7 +2,7 @@
   <v-app>
     <v-container>
       <v-row align="center" no-gutters>
-        <v-col cols="12">
+        <v-col cols="12" class="mb-10">
           <h1>Bantuan</h1>
           <h2 class="mt-5">Deskripsi</h2>
           <p>
