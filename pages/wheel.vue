@@ -83,7 +83,7 @@ export default {
     logKejadian: {
       deep: true,
       handler() {
-        localStorage.setItem("logCard", JSON.stringify(this.logKejadian));
+        localStorage.setItem("logWheel", JSON.stringify(this.logKejadian));
       },
     },
   },
@@ -91,8 +91,8 @@ export default {
     if (localStorage.getItem("wheelChartData")) {
       this.chartData = JSON.parse(localStorage.getItem("wheelChartData"));
     }
-    if (localStorage.getItem("logCard")) {
-      this.logKejadian = JSON.parse(localStorage.getItem("logCard"));
+    if (localStorage.getItem("logWheel")) {
+      this.logKejadian = JSON.parse(localStorage.getItem("logWheel"));
     }
   },
   data() {
