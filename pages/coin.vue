@@ -3,13 +3,14 @@
     <v-container class="mb-10">
       <v-row align="center" no-gutters>
         <v-col cols="12" sm="12" lg="6">
-          <v-row style="width: 100%" justify="center">
-            <img
+          <v-row style="width: 100%" class="" justify="center" align="center">
+            <v-col
+              cols="4"
               v-for="(item, index) in coin_images"
-              style="max-width: 200px"
-              :src="item"
               :key="index + item"
-            />
+            >
+              <img width="100%" :src="item" />
+            </v-col>
           </v-row>
         </v-col>
         <v-col cols="12" sm="12" lg="6" class="pt-5">
