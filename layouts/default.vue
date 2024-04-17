@@ -20,7 +20,7 @@
 
         <span>Koin</span>
       </v-btn>
-      <v-btn value="Koin" to="/wheel">
+      <v-btn value="Wheel" to="/wheel">
         <v-icon>mdi-ship-wheel</v-icon>
 
         <span>Wheel</span>
