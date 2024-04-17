@@ -20,6 +20,11 @@
 
         <span>Koin</span>
       </v-btn>
+      <v-btn value="Koin" to="/wheel">
+        <v-icon>mdi-ship-wheel</v-icon>
+
+        <span>Wheel</span>
+      </v-btn>
       <v-btn value="Bantuan" to="/help">
         <v-icon>mdi-help</v-icon>
 

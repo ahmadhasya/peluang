@@ -7,8 +7,8 @@
           <h2 class="mt-5">Deskripsi Singkat</h2>
           <p>
             Media ini dibuat sebagai simulasi untuk cara kerja peluang yang
-            berasal dari beberapa permainan seperti dadu, kartu bridge, koin,
-            spinner dan bola berwarna dalam kotak.
+            berasal dari beberapa permainan seperti dadu, kartu bridge, koin, dan
+            Wheel of Fortune.
           </p>
           <h2 class="mt-5">Cara Penggunaan</h2>
           <ul>

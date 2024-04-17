@@ -99,7 +99,7 @@ export default {
         datasets: [
           {
             label: "Kejadian",
-            backgroundColor: "#1867c0",
+            backgroundColor: "#335e3b",
             data: [0, 0, 0, 0, 0, 0],
           },
         ],
@@ -138,7 +138,7 @@ export default {
         datasets: [
           {
             label: "Kejadian",
-            backgroundColor: "#1867c0",
+            backgroundColor: "#335e3b",
             data: [0, 0, 0, 0, 0, 0],
           },
         ],
