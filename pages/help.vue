@@ -50,7 +50,7 @@
             <li>Vue JS</li>
             <li>Vuetify</li>
           </ul>
-          <h2 class="mt-5">Repository</h2>
+          <h2 class="mt-5">Links</h2>
           <p>
             <v-btn
               icon
@@ -58,8 +58,27 @@
               variant="text"
               href="https://github.com/ahmadhasya/peluang"
               target="_blank"
-              ><v-icon>mdi-github</v-icon></v-btn
             >
+              <v-icon>mdi-github</v-icon>
+            </v-btn>
+            <v-btn
+              icon
+              color="pink"
+              variant="text"
+              href="https://drive.google.com/file/d/1QumeSjhT0dZXXd6FmyXnqP2I3rZi-iSv/view?usp=drive_link"
+              target="_blank"
+            >
+              <v-icon>mdi-book-open-variant-outline</v-icon>
+            </v-btn>
+            <v-btn
+              icon
+              color="purple"
+              variant="text"
+              href="https://forms.gle/2ghKkQx97z5XUMa6A"
+              target="_blank"
+            >
+              <v-icon>mdi-list-box-outline</v-icon>
+            </v-btn>
           </p>
         </v-col>
       </v-row>
